@@ -1,0 +1,33 @@
+LOG:  database system was shut down at 2016-07-26 16:22:42 BST
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+FATAL:  database "jin.xie" does not exist
+FATAL:  role "postgres" does not exist
+FATAL:  database "jin.xie" does not exist
+FATAL:  role "postgres" does not exist
+FATAL:  database "jin.xie" does not exist
+ERROR:  database "pin-sensation" already exists
+STATEMENT:  CREATE DATABASE "pin-sensation" ENCODING = 'unicode'
+ERROR:  column chatrooms.slug does not exist at character 46
+STATEMENT:  SELECT  "chatrooms".* FROM "chatrooms" WHERE "chatrooms"."slug" IS NULL LIMIT $1
+ERROR:  column chatrooms.slug does not exist at character 46
+STATEMENT:  SELECT  "chatrooms".* FROM "chatrooms" WHERE "chatrooms"."slug" IS NULL LIMIT $1
+ERROR:  argument of WHERE must be type boolean, not type integer at character 47
+STATEMENT:  SELECT  "chatrooms".* FROM "chatrooms" WHERE (1) LIMIT $1
+ERROR:  argument of WHERE must be type boolean, not type integer at character 47
+STATEMENT:  SELECT  "chatrooms".* FROM "chatrooms" WHERE (1) LIMIT $1
+FATAL:  terminating connection due to administrator command
+LOG:  received smart shutdown request
+LOG:  autovacuum launcher shutting down
+FATAL:  terminating connection due to administrator command
+FATAL:  terminating connection due to administrator command
+FATAL:  terminating connection due to administrator command
+FATAL:  terminating connection due to administrator command
+FATAL:  terminating connection due to administrator command
+LOG:  shutting down
+LOG:  database system is shut down
+LOG:  database system was shut down at 2016-07-29 08:39:51 BST
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
