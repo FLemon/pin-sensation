@@ -1,0 +1,20 @@
+<h1>List</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>name</th>
+      <th>content</th>
+      <th>comment</th>
+    </tr>
+  </thead>
+  <tbody id='items'>
+    <% list.items.each do |item| %>
+      <tr>
+        <td><%= item.name %></td>
+        <td><%= item.content %></td>
+        <td><%= item.comment %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
