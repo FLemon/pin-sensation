@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :chatrooms
   resources :messages
   resource :list, only: [:show]
-  resource :item, only: [:create]
+  resource :item, only: [:create, :destroy]
 
   root 'chatrooms#index'
 end

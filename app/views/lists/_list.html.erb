@@ -1,20 +1,6 @@
-<h1>List</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>name</th>
-      <th>content</th>
-      <th>comment</th>
-    </tr>
-  </thead>
-  <tbody id='items'>
-    <% list.items.each do |item| %>
-      <tr>
-        <td><%= item.name %></td>
-        <td><%= item.content %></td>
-        <td><%= item.comment %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<ul class='list' id='items'>
+  <% list.items.reverse.each do |item| %>
+    <li name='item_<%= item.id %>'><%= render item %></li>
+    <li name='item_<%= item.id %>' class='divider'></li>
+  <% end %>
+</ul>

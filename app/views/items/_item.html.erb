@@ -1,0 +1,16 @@
+<div ripple style='width: 100%'>
+  <% image_url = 'https://pbs.twimg.com/profile_images/514741347832459264/91rhOB8I_400x400.png' %>
+  <img class='item-icon' src="<%= image_url %>" alt=""/>
+  <span class='item-text'>
+    <%= item.name %>
+    <span class='secondary-text color-orange-500'>
+      <%= item.content %>
+      <span class='secondary-text'><%= item.comment %></span>
+    </span>
+  </span>
+</div>
+<%= button_to item_path, action: 'delete', remote: true,
+  method: :delete, data: { confirm: 'Are you sure?' }, params: { item: { id: item } },
+  class: 'button', style: 'height: 100%' do %>
+  <i class="icon-cancel color-red-500"></i>
+<% end %>

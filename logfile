@@ -31,3 +31,4 @@ LOG:  database system was shut down at 2016-07-29 08:39:51 BST
 LOG:  MultiXact member wraparound protections are now enabled
 LOG:  database system is ready to accept connections
 LOG:  autovacuum launcher started
+FATAL:  database "jin.xie" does not exist

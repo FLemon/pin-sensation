@@ -10,9 +10,6 @@ describe ListsController, type: :controller do
       Item.create!(list: list, name: "example name 2", content: "example content", comment: "example comment")
 
       get :show
-      # res = JSON.parse(response.body)
-      #
-      # expect(res[0]['name']).to eq('example name')
       expect(response.body).to match(/example name/)
       expect(response.body).to match(/example name 2/)
     end

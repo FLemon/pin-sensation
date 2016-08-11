@@ -1,2 +1,8 @@
-<%= render 'list', list: @list %>
-<%= render '/items/form' %>
+<div>
+  <div style='text-align: center; width: 100%;'>
+    <%= render '/items/form' %>
+  </div>
+  <div  style='max-width: 600px; margin: 0 auto;'>
+    <%= render @list %>
+  </div>
+</div>
