@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
 
     ActionCable.server.broadcast 'items',
       action: 'create',
-      template: render(item)
+      template: render(partial: 'lists/list_item', locals: { item: item })
     head :ok
   end
 

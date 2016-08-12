@@ -27,6 +27,37 @@ require 'rspec/rails'
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+  action_cable_host_and_port = Rails.application.config.action_cable.url.match(/ws:\/\/(.*):(.*)\/cable/)
+  if action_cable_host_and_port
+    Capybara.server_host = action_cable_host_and_port[1]
+    Capybara.server_port = action_cable_host_and_port[2]
+  end
+
+  # Capybara.javascript_driver = :webkit
+  Capybara.javascript_driver = :selenium
+
+  Capybara::Webkit.configure do |config|
+    config.allow_unknown_urls
+  end
+
+  # Capybara.server do |app, port|
+  #   Puma::Server.new(app).tap do |s|
+  #     s.add_tcp_listener Capybara.server_host, port
+  #   end.run.join
+  # end
+  #
+  Capybara.register_server :puma do |app, port, host|
+    server = Puma::Server.new(app)
+    server.add_tcp_listener(host, port)
+    server.run
+  end
+
+  Capybara.server = :puma
+
+  # Capybara.register_driver :chrome do |app|
+  #     Capybara::Selenium::Driver.new(app, :browser => :chrome)
+  # end
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

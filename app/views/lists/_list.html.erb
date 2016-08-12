@@ -1,6 +1,5 @@
-<ul class='list' id='items'>
+<ul class='list' id='list'>
   <% list.items.reverse.each do |item| %>
-    <li name='item_<%= item.id %>'><%= render item %></li>
-    <li name='item_<%= item.id %>' class='divider'></li>
+    <%= render 'list_item', item: item %>
   <% end %>
 </ul>
