@@ -27,25 +27,19 @@ require 'rspec/rails'
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+  # If you're not using ActiveRecord, or you'd prefer not to run each of your
+  # examples within a transaction, remove the following line or assign false
+  # instead of true.
+  config.use_transactional_fixtures = false
+
   action_cable_host_and_port = Rails.application.config.action_cable.url.match(/ws:\/\/(.*):(.*)\/cable/)
   if action_cable_host_and_port
     Capybara.server_host = action_cable_host_and_port[1]
     Capybara.server_port = action_cable_host_and_port[2]
   end
 
-  # Capybara.javascript_driver = :webkit
   Capybara.javascript_driver = :selenium
 
-  Capybara::Webkit.configure do |config|
-    config.allow_unknown_urls
-  end
-
-  # Capybara.server do |app, port|
-  #   Puma::Server.new(app).tap do |s|
-  #     s.add_tcp_listener Capybara.server_host, port
-  #   end.run.join
-  # end
-  #
   Capybara.register_server :puma do |app, port, host|
     server = Puma::Server.new(app)
     server.add_tcp_listener(host, port)
@@ -58,13 +52,25 @@ RSpec.configure do |config|
   #     Capybara::Selenium::Driver.new(app, :browser => :chrome)
   # end
 
-  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
 
-  # If you're not using ActiveRecord, or you'd prefer not to run each of your
-  # examples within a transaction, remove the following line or assign false
-  # instead of true.
-  config.use_transactional_fixtures = true
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  config.before(:each, type: :feature) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.append_after(:each) do
+    DatabaseCleaner.clean
+  end
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
