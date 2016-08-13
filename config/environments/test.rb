@@ -1,3 +1,6 @@
+HOST = 'localhost'
+PORT = 4999
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -40,6 +43,6 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   config.action_cable.disable_request_forgery_protection = true
-  config.action_cable.url = "ws://localhost:4999/cable"
-  config.action_cable.allowed_request_origins = [ "http://localhost:4999" ]
+  config.action_cable.url = "ws://#{HOST}:#{PORT}/cable"
+  config.action_cable.allowed_request_origins = [ "http://#{HOST}:#{PORT}" ]
 end

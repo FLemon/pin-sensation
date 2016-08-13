@@ -1,3 +1,5 @@
+HOST = ENV['HOST_NAME']
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -36,8 +38,8 @@ Rails.application.configure do
 
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
-  config.action_cable.url = "wss://pin-sensation-rails-5.herokuapp.com/cable"
-  config.action_cable.allowed_request_origins = [ 'https://pin-sensation-rails-5.herokuapp.com', /http:\/\/pin-sensation-rails-5.herokuapp.com.*/ ]
+  config.action_cable.url = "wss://#{HOST}/cable"
+  config.action_cable.allowed_request_origins = [ "https://#{HOST}", /http:\/\/#{HOST}.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
