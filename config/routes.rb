@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   mount ActionCable.server => '/cable'
 
   resources :chatrooms
@@ -6,5 +7,5 @@ Rails.application.routes.draw do
   resource :list, only: [:show]
   resource :item, only: [:create, :destroy]
 
-  root 'chatrooms#index'
+  root 'lists#show'
 end
