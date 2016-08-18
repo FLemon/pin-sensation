@@ -10,8 +10,23 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <div class='notification'>
+      <% if notice %>
+        <div class="toast">
+          <label class="toast-label"><%= notice %></label>
+        </div>
+      <% end %>
+      <% if alert %>
+        <div class="toast">
+          <label class="toast-label"><%= alert %></label>
+        </div>
+      <% end %>
+    </div>
+    <% if current_user %>
+      <div class='session-panel'>
+        <%= user_firstname.capitalize %>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>

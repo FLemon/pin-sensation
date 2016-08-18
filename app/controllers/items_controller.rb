@@ -1,8 +1,10 @@
 class ItemsController < ApplicationController
   #xoxb-66734971440-vDCyCHjPD9s5ofslVyjE2mUn
+  before_action :authenticate_user!
+
   def create
     list = List.last || List.create!
-    item = Item.create!(params_for_create.merge({ list: list }))
+    item = Item.create!(params_for_create.merge({ list: list, name: current_user.name }))
 
     ActionCable.server.broadcast 'items',
       action: 'create',
@@ -26,6 +28,6 @@ class ItemsController < ApplicationController
   end
 
   def params_for_create
-    params.require(:item).permit(:name, :content, :comment)
+    params.require(:item).permit(:content, :comment)
   end
 end

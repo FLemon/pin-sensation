@@ -1,9 +1,15 @@
 require "rails_helper"
 
 describe ItemsController, type: :controller do
+  let(:user) { User.create!(email:'example@example.com', name:'example name', password: 'password') }
+
+  before do
+    sign_in(user)
+  end
+
   describe "#destroy" do
     let(:list) { List.create! }
-    let!(:item) { Item.create!(list: list, name: "example name", content: "example content", comment: "example comment") }
+    let!(:item) { Item.create!(list: list, content: "example content", comment: "example comment") }
 
     it "should remove an item from the list" do
       expect do
@@ -20,7 +26,7 @@ describe ItemsController, type: :controller do
 
       it "should create a new item in the list" do
         expect do
-          post :create, format: :js, params: { item: { name: 'example name' } }
+          post :create, format: :js, params: { item: { content: 'example content' } }
         end.to change{ List.count }.by(0)
         expect(response.success?).to eq true
         expect(response.status).to eq 200
@@ -30,7 +36,7 @@ describe ItemsController, type: :controller do
     context "when there isn't a list" do
       it "should create a new item in the list" do
         expect do
-          post :create, format: :js, params: { item: { name: 'example name' } }
+          post :create, format: :js, params: { item: { content: 'example content' } }
         end.to change{ List.count }.from(0).to(1)
         expect(response.success?).to eq true
         expect(response.status).to eq 200

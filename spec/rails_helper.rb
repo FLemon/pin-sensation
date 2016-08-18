@@ -32,6 +32,8 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = false
 
+  config.include Devise::Test::ControllerHelpers, type: :controller
+
   action_cable_host_and_port = Rails.application.config.action_cable.url.match(/ws:\/\/(.*):(.*)\/cable/)
   if action_cable_host_and_port
     Capybara.server_host = action_cable_host_and_port[1]
@@ -69,6 +71,7 @@ RSpec.configure do |config|
   end
 
   config.append_after(:each) do
+    OmniAuth.config.test_mode = false
     DatabaseCleaner.clean
   end
 

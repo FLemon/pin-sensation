@@ -1,17 +1,20 @@
 require 'rails_helper'
+require 'omniauth_helpers'
 
 feature "User can destroy item from list", js: true do
-  before { visit '/list' }
+  include OmniauthHelpers
+
+  before do
+    list = List.create!
+    Item.create!(list: list, name: 'example name', content: "example content", comment: "example comment")
+    mock_auth_with_user
+    visit user_google_oauth2_omniauth_authorize_path
+  end
 
   scenario "when user fill in the form and create an item to the list" do
-    fill_in 'item_name', with: 'feature example name'
-    fill_in 'item_content', with: 'feature example content'
-    fill_in 'item_comment', with: 'feature example comment'
-    find('#submit-new-item').click
-
     page.accept_confirm 'Are you sure' do
-      find('li', text: 'feature example name').find("button[action='delete']").click
+      find('li', text: 'example name').find("button[action='delete']").click
     end
-    expect(has_css?('li', text: 'feature example name')).to eq false
+    expect(has_css?('li', text: 'example name')).to eq false
   end
 end

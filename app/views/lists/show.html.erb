@@ -1,6 +1,6 @@
 <div>
   <div style='text-align: center; width: 100%;'>
-    <%= render '/items/form' %>
+    <%= render '/items/form' if current_user %>
   </div>
   <div  style='max-width: 600px; margin: 0 auto;'>
     <%= render @list %>
