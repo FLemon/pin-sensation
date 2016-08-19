@@ -11,7 +11,7 @@ feature "User can add item to list", js: true do
     visit user_google_oauth2_omniauth_authorize_path
   end
 
-  scenario "when user fill in the form and create an item to the list" do
+  scenario "can add item" do
     fill_in 'item_content', with: 'feature example content'
     fill_in 'item_comment', with: 'feature example comment'
     find('#submit-new-item').click

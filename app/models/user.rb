@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   has_many :messages
   has_many :chatroom, through: :messages
+  has_many :items
   validates :name, presence: true, uniqueness: true
 
   def self.from_omniauth!(auth)

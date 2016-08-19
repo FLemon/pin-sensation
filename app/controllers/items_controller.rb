@@ -4,16 +4,15 @@ class ItemsController < ApplicationController
 
   def create
     list = List.last || List.create!
-    item = Item.create!(params_for_create.merge({ list: list, name: current_user.name }))
+    item = Item.create!(params_for_create.merge({ list: list, user: current_user }))
 
     ActionCable.server.broadcast 'items',
       action: 'create',
       template: render(partial: 'lists/list_item', locals: { item: item })
-    head :ok
   end
 
   def destroy
-    item = Item.find(params_for_destroy)
+    item = current_user.items.find(params_for_destroy)
     item.destroy!
     ActionCable.server.broadcast 'items',
       action: 'destroy',
